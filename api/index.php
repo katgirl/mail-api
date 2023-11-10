@@ -11,6 +11,7 @@
     $transport = Transport::fromDsn(($_ENV['SMTP_TLS'] ? 'smtps' : 'smtp').'://\''.$_ENV['SMTP_USER'].'\':'.$_ENV['SMTP_PASS'].'@'.$_ENV['SMTP_HOST'].':'.$_ENV['SMTP_PORT']);
     // Create the Mailer using your created Transport
     $mailer = new Mailer($transport);
+/*    
     // Set Mail-Config
     return static function (FrameworkConfig $framework) {
         $mailer = $framework->mailer();
@@ -23,7 +24,7 @@
         $mailer->header('From')->value($_ENV['SMTP_USER']);
         $mailer->header('X-Custom-Header')->value('Online-Shop');
     };
-
+*/
 
     $email = (new Email())
         ->from($_ENV['SMTP_USER'])
@@ -36,5 +37,11 @@
         ->text('Sending emails is fun again!')
         ->html('<p>See Twig integration for better HTML integration!</p>');
 
-    $mailer->send($email);
+    try {
+        $mailer->send($email);
+    } catch (TransportExceptionInterface $e) {
+        var_dump($e);
+        // some error prevented the email sending; display an
+        // error message or try to resend the message
+    }
 
