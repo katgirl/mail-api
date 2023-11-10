@@ -8,7 +8,6 @@
     
     if(getBearerToken() != $_ENV['API_KEY']) {
         echo "Unauthorized";
-        header('X-PHP-Response-Code: 404', true, '404');
         exit;
     }
 
@@ -31,9 +30,6 @@
 
     try {
         $mailer->send($email);
-        http_response_code(200);
-        header('Content-type: application/json');
-
         return '{ "success":"true", "message": "confirmation emails sent" }';
     
     } catch (TransportExceptionInterface $e) {
