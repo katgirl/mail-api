@@ -30,7 +30,7 @@
 
     try {
         $mailer->send($email);
-        return '{ "success":"true", "message": "confirmation emails sent" }';
+        echo '{ "success":"true", "message": "confirmation emails sent" }';
     
     } catch (TransportExceptionInterface $e) {
         header('X-PHP-Response-Code: 500', true, '500');
