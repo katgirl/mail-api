@@ -11,19 +11,6 @@
     $transport = Transport::fromDsn(($_ENV['SMTP_TLS'] ? 'smtp' : 'smtps').'://'.$_ENV['SMTP_USER'].':'.$_ENV['SMTP_PASS'].'@'.$_ENV['SMTP_HOST'].':'.$_ENV['SMTP_PORT']);
     // Create the Mailer using your created Transport
     $mailer = new Mailer($transport);
-    
-    // Set Mail-Config
-    return static function (FrameworkConfig $framework) {
-        $mailer = $framework->mailer();
-        $mailer
-            ->envelope()
-                ->sender($_ENV['SMTP_USER'])
-                ->recipients($_ENV['SMTP_USER'])
-        ;
-
-        $mailer->header('From')->value($_ENV['SMTP_USER']);
-        $mailer->header('X-Custom-Header')->value('Online-Shop');
-    };
 
     $email = (new Email())
         ->from($_ENV['SMTP_USER'])
@@ -32,7 +19,7 @@
         ->bcc($_ENV['SMTP_USER'])
         //->replyTo('fabien@example.com')
         //->priority(Email::PRIORITY_HIGH)
-        ->subject('Time for Symfony Mailer!')
+        ->subject('Time for Symfony Mailer2!')
         ->text('Sending emails is fun again!')
         ->html('<p>See Twig integration for better HTML integration!</p>');
 
