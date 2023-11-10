@@ -3,10 +3,10 @@
     use Symfony\Component\Mailer\Mailer;
     use Symfony\Component\Mime\Email;    
 
-    require_once('vendor/autoload.php');
+    //require_once('vendor/autoload.php');
     
     print($_ENV['RANDOMNESS_ENV_VAR'] . ':env');
-
+/*
     // Create the Transport
     $transport = Transport::fromDsn('smtp://localhost');
     // Create the Mailer using your created Transport
