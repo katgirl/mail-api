@@ -5,7 +5,7 @@
 
     //require_once('vendor/autoload.php');
 echo "Test-" . "a";    
-    print_r($_ENV);
+//    print_r($_ENV);
 /*
     // Create the Transport
     $transport = Transport::fromDsn('smtp://localhost');
