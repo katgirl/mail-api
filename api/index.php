@@ -4,7 +4,7 @@
     use Symfony\Component\Mime\Email;    
 
     //require_once('vendor/autoload.php');
-    
+echo "Test-" . "a";    
     print($_ENV);
 /*
     // Create the Transport
