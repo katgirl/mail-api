@@ -1,7 +1,7 @@
 <?php
-    use Symfony\Component\Mailer\Transport;
-    use Symfony\Component\Mailer\Mailer;
-    use Symfony\Component\Mime\Email;    
+//    use Symfony\Component\Mailer\Transport;
+//    use Symfony\Component\Mailer\Mailer;
+//    use Symfony\Component\Mime\Email;    
 
     //require_once('vendor/autoload.php');
 echo "Test-" . "a";    
@@ -38,3 +38,4 @@ echo "Test-" . "a";
 
     $mailer->send($email);
 
+*/
