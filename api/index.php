@@ -10,6 +10,7 @@
 
     echo $token;
 
+    return $token;
 
 /*
 
