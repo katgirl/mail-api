@@ -6,15 +6,9 @@
     use Symfony\Component\Mailer\Mailer;
     use Symfony\Component\Mime\Email;   
     
-    $token = getBearerToken();
-
-    echo $token;
-
-    return $token;
-
-/*
-
-
+    if(getBearerToken() != $_ENV['API_KEY']) {
+        http_response_code(404); exit;
+    }
 
 
     // Create the Transport
@@ -35,15 +29,13 @@
 
     try {
         $mailer->send($email);
+        http_response_code(200);
+        header('Content-type: application/json');
 
-        return [
-            "status" 200,
-
-        ];
+        return '{ "success":"true", "message": "confirmation emails sent" }';
+    
     } catch (TransportExceptionInterface $e) {
-        var_dump($e);
+        http_response_code(500);
         // some error prevented the email sending; display an
         // error message or try to resend the message
     }
-
-*/
