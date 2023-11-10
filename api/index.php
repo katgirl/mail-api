@@ -8,7 +8,8 @@
     
     if(getBearerToken() != $_ENV['API_KEY']) {
         echo "Unauthorized";
-        http_response_code(404); exit;
+        header("Status: 404 Not Found"); 
+        exit;
     }
 
 
