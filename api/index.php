@@ -5,7 +5,7 @@
 
     //require_once('vendor/autoload.php');
     
-    print($_ENV['RANDOMNESS_ENV_VAR'] . ':env');
+    print($_ENV);
 /*
     // Create the Transport
     $transport = Transport::fromDsn('smtp://localhost');
