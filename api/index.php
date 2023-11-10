@@ -3,7 +3,7 @@
     use Symfony\Component\Mailer\Mailer;
     use Symfony\Component\Mime\Email;    
 
-    require_once('../vendor/autoload.php');
+    require_once('vendor/autoload.php');
     
     print($_ENV['RANDOMNESS_ENV_VAR'] . ':env');
 
