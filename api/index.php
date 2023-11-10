@@ -8,20 +8,20 @@
     echo ($_ENV['SMTP_TLS'] ? 'smtps' : 'smtp').'://'.$_ENV['SMTP_USER'].':'.$_ENV['SMTP_USER'].'@'.$_ENV['SMTP_HOST'].':'.$_ENV['SMTP_PORT'];
 
     // Create the Transport
-    $transport = Transport::fromDsn(($_ENV['SMTP_TLS'] ? 'smtps' : 'smtp').'://'.$_ENV['SMTP_USER'].':'.$_ENV['SMTP_PASS'].'@'.$_ENV['SMTP_HOST'].':'.$_ENV['SMTP_PORT']);
+    $transport = Transport::fromDsn(($_ENV['SMTP_TLS'] ? 'smtps' : 'smtp').'://\''.$_ENV['SMTP_USER'].'\':'.$_ENV['SMTP_PASS'].'@'.$_ENV['SMTP_HOST'].':'.$_ENV['SMTP_PORT']);
     // Create the Mailer using your created Transport
     $mailer = new Mailer($transport);
     // Set Mail-Config
     return static function (FrameworkConfig $framework) {
-    $mailer = $framework->mailer();
-    $mailer
-        ->envelope()
-            ->sender($_ENV['SMTP_USER'])
-            ->recipients($_ENV['SMTP_USER'])
-    ;
+        $mailer = $framework->mailer();
+        $mailer
+            ->envelope()
+                ->sender($_ENV['SMTP_USER'])
+                ->recipients($_ENV['SMTP_USER'])
+        ;
 
-    $mailer->header('From')->value($_ENV['SMTP_USER']);
-    $mailer->header('X-Custom-Header')->value('Online-Shop');
+        $mailer->header('From')->value($_ENV['SMTP_USER']);
+        $mailer->header('X-Custom-Header')->value('Online-Shop');
     };
 
 
