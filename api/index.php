@@ -8,7 +8,7 @@
     echo ($_ENV['SMTP_TLS'] ? 'smtps' : 'smtp').'://'.$_ENV['SMTP_USER'].':'.$_ENV['SMTP_USER'].'@'.$_ENV['SMTP_HOST'].':'.$_ENV['SMTP_PORT'];
 
     // Create the Transport
-    $transport = Transport::fromDsn(($_ENV['SMTP_TLS'] ? 'smtp' : 'smtps').'://\''.$_ENV['SMTP_USER'].'\':'.$_ENV['SMTP_PASS'].'@'.$_ENV['SMTP_HOST'].':'.$_ENV['SMTP_PORT']);
+    $transport = Transport::fromDsn(($_ENV['SMTP_TLS'] ? 'smtp' : 'smtps').'://'.$_ENV['SMTP_USER'].':'.$_ENV['SMTP_PASS'].'@'.$_ENV['SMTP_HOST'].':'.$_ENV['SMTP_PORT']);
     // Create the Mailer using your created Transport
     $mailer = new Mailer($transport);
 /*    
