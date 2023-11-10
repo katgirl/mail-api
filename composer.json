@@ -1,0 +1,15 @@
+{
+    "require": {
+      "php": "^8.2",
+      "ext-ctype": "*",
+      "ext-iconv": "*",
+      "symfony/mailer": "^6.3",
+      "symfony/yaml": "^6.3.*"
+    },
+    "scripts": {
+      "vercel": [
+        "@php --ini",
+        "@php -m"
+      ]
+    }
+  }
