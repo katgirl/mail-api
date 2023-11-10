@@ -5,12 +5,8 @@
     use Symfony\Component\Mailer\Mailer;
     use Symfony\Component\Mime\Email;    
 
-    //require_once('vendor/autoload.php');
-echo "Test-" . "a";    
-//    print_r($_ENV);
-/*
     // Create the Transport
-    $transport = Transport::fromDsn('smtp://localhost');
+    $transport = Transport::fromDsn(($_ENV['SMTP_TLS'] ? 'smtps' : 'smtp').'://'.$_ENV['SMTP_USER'].':'.$_ENV['SMTP_PASS'].'@'.$_ENV['SMTP_HOST'].':'.$_ENV['SMTP_PORT']);
     // Create the Mailer using your created Transport
     $mailer = new Mailer($transport);
     // Set Mail-Config
@@ -18,18 +14,18 @@ echo "Test-" . "a";
     $mailer = $framework->mailer();
     $mailer
         ->envelope()
-            ->sender('kirsten@kirsten-roschanski.de')
-            ->recipients(['order@kirsten-roschanski.de'])
+            ->sender($_ENV['SMTP_USER'])
+            ->recipients($_ENV['SMTP_USER'])
     ;
 
-    $mailer->header('From')->value('HRZ-Accounts <kirsten@kirsten-roschanski.de>');
+    $mailer->header('From')->value($_ENV['SMTP_USER']);
     $mailer->header('X-Custom-Header')->value('Online-Shop');
     };
 
 
     $email = (new Email())
-        ->from('kirsten@kirsten-roschanski.de')
-        ->to('kirsten@kirsten-roschanski.de')
+        ->from($_ENV['SMTP_USER'])
+        ->to('info@kirsten-roschanski.de')
         //->cc('cc@example.com')
         //->bcc('bcc@example.com')
         //->replyTo('fabien@example.com')
@@ -40,4 +36,3 @@ echo "Test-" . "a";
 
     $mailer->send($email);
 
-*/
