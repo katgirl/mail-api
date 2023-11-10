@@ -7,6 +7,7 @@
     use Symfony\Component\Mime\Email;   
     
     if(getBearerToken() != $_ENV['API_KEY']) {
+        echo "Unauthorized";
         http_response_code(404); exit;
     }
 
