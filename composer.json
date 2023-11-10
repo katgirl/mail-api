@@ -11,5 +11,10 @@
         "@php --ini",
         "@php -m"
       ]
+    },
+    "build": {
+      "env": {
+        "NOW_PHP_DEBUG": "1"
+      }
     }
 }
