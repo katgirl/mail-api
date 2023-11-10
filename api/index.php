@@ -1,11 +1,20 @@
 <?php
     require_once __DIR__ . '/../vendor/autoload.php';
+    require_once __DIR__ . '/func.php';
     
     use Symfony\Component\Mailer\Transport;
     use Symfony\Component\Mailer\Mailer;
-    use Symfony\Component\Mime\Email;    
+    use Symfony\Component\Mime\Email;   
+    
+    $token = getBearerToken();
 
-    echo ($_ENV['SMTP_TLS'] ? 'smtps' : 'smtp').'://'.$_ENV['SMTP_USER'].':'.$_ENV['SMTP_USER'].'@'.$_ENV['SMTP_HOST'].':'.$_ENV['SMTP_PORT'];
+    echo $token;
+
+
+/*
+
+
+
 
     // Create the Transport
     $transport = Transport::fromDsn(($_ENV['SMTP_TLS'] ? 'smtp' : 'smtps').'://'.$_ENV['SMTP_USER'].':'.$_ENV['SMTP_PASS'].'@'.$_ENV['SMTP_HOST'].':'.$_ENV['SMTP_PORT']);
@@ -25,9 +34,15 @@
 
     try {
         $mailer->send($email);
+
+        return [
+            "status" 200,
+
+        ];
     } catch (TransportExceptionInterface $e) {
         var_dump($e);
         // some error prevented the email sending; display an
         // error message or try to resend the message
     }
 
+*/
