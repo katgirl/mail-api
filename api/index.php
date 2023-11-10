@@ -7,7 +7,8 @@
     use Symfony\Component\Mime\Email;   
     
     if(getBearerToken() != $_ENV['API_KEY']) {
-        header("Status: 404 Not Found"); 
+        echo "Unauthorized";
+        header('X-PHP-Response-Code: 404', true, '404');
         exit;
     }
 
@@ -36,7 +37,7 @@
         return '{ "success":"true", "message": "confirmation emails sent" }';
     
     } catch (TransportExceptionInterface $e) {
-        http_response_code(500);
+        header('X-PHP-Response-Code: 500', true, '500');
         // some error prevented the email sending; display an
         // error message or try to resend the message
     }
