@@ -31,6 +31,7 @@
         
         // path of the Twig template to render
         ->htmlTemplate(__DIR__ . '/../templates/signup.html.twig')
+        ->textTemplate(__DIR__ . '/../templates//signup.txt.twig')
 
         // pass variables (name => value) to the template
         ->context([
