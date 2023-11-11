@@ -11,7 +11,6 @@
         exit;
     }
 
-
     // Create the Transport
     $transport = Transport::fromDsn(($_ENV['SMTP_TLS'] ? 'smtp' : 'smtps').'://'.$_ENV['SMTP_USER'].':'.$_ENV['SMTP_PASS'].'@'.$_ENV['SMTP_HOST'].':'.$_ENV['SMTP_PORT']);
     // Create the Mailer using your created Transport
@@ -30,7 +29,7 @@
 
     try {
         $mailer->send($email);
-        echo '{ "success":"true", "message": "confirmation emails sent" }';
+        echo json_encode($_POST); // '{ "success":"true", "message": "confirmation emails sent" }';
     
     } catch (TransportExceptionInterface $e) {
         header('X-PHP-Response-Code: 500', true, '500');
