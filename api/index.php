@@ -7,13 +7,18 @@
     use Symfony\Component\Mime\Address;
     use Symfony\Bridge\Twig\Mime\TemplatedEmail;
     
-    if(getBearerToken() != $_ENV['API_KEY']) {
-        echo "Unauthorized";
-        exit;
-    }
+   // if(getBearerToken() != $_ENV['API_KEY']) {
+   //     echo "Unauthorized";
+   //     exit;
+   // }
 
-    $body = file_get_contents('php://input');
+   // $body = file_get_contents('php://input');
+    $body    = '{"checkout_type":"bank-transfer","billing_info":{"email":"kirsten@kirsten-roschanski.de","address":{"billing_firstname":"Kirsten","billing_lastname":"Roschanski","billing_street":"Schwalbenweg, 11, 11","billing_street_additional":"11","billing_zip":"35043","billing_city":"Marburg","billing_country":"DE","billing_phone":"+491799946813","billing_email":"kirsten@kirsten-roschanski.de","billing_notes":"test"},"total":1200,"currency":"EUR","payment_method":"Banküberweisung","cart":[{"quantity":1,"article":"Françoise Dugourd-Caput - Lascive - 80 x 60 cm","amount":1200,"currency":"EUR","imageUrl":"https://cdn.sanity.io/images/ovj42q9c/galleristic/d8d760fc438ca4aabee6b473e2524abbbab24f38-1808x2438.png"}]}}';
     $data = json_decode($body);
+
+    if (file_exists(__DIR__ . '/../templates/signup.html.twig')) {
+        echo "Die Datei __DIR__ . '/../templates/signup.html.twig' existiert";
+    }
 
     // Create the Transport
     $transport = Transport::fromDsn(($_ENV['SMTP_TLS'] ? 'smtp' : 'smtps').'://'.$_ENV['SMTP_USER'].':'.$_ENV['SMTP_PASS'].'@'.$_ENV['SMTP_HOST'].':'.$_ENV['SMTP_PORT']);
@@ -31,7 +36,7 @@
         
         // path of the Twig template to render
         ->htmlTemplate(__DIR__ . '/../templates/signup.html.twig')
-        ->textTemplate(__DIR__ . '/../templates//signup.txt.twig')
+        ->textTemplate(__DIR__ . '/../templates/signup.txt.twig')
 
         // pass variables (name => value) to the template
         ->context([
