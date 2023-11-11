@@ -40,7 +40,7 @@
         ->subject('Thanks for signing up!')
         
         // path of the Twig template to render
-        ->htmlTemplate($filename)
+        ->htmlTemplate('signup.html.twig')
 
         // pass variables (name => value) to the template
         ->context([
