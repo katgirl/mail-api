@@ -5,7 +5,10 @@
     use Symfony\Component\Mailer\Transport;
     use Symfony\Component\Mailer\Mailer;
     use Symfony\Component\Mime\Address;
+    use Symfony\Bridge\Twig\Mime\BodyRenderer;
     use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+    use Twig\Environment as TwigEnvironment;
+    use Twig\Loader\FilesystemLoader as TwigFilesystemLoader;
     
    // if(getBearerToken() != $_ENV['API_KEY']) {
    //     echo "Unauthorized";
@@ -15,6 +18,9 @@
    // $body = file_get_contents('php://input');
     $body    = '{"checkout_type":"bank-transfer","billing_info":{"email":"kirsten@kirsten-roschanski.de","address":{"billing_firstname":"Kirsten","billing_lastname":"Roschanski","billing_street":"Schwalbenweg, 11, 11","billing_street_additional":"11","billing_zip":"35043","billing_city":"Marburg","billing_country":"DE","billing_phone":"+491799946813","billing_email":"kirsten@kirsten-roschanski.de","billing_notes":"test"},"total":1200,"currency":"EUR","payment_method":"Banküberweisung","cart":[{"quantity":1,"article":"Françoise Dugourd-Caput - Lascive - 80 x 60 cm","amount":1200,"currency":"EUR","imageUrl":"https://cdn.sanity.io/images/ovj42q9c/galleristic/d8d760fc438ca4aabee6b473e2524abbbab24f38-1808x2438.png"}]}}';
     $data = json_decode($body);
+    $loader = new TwigFilesystemLoader( __DIR__ . '/../templates/' );
+    $twig = new TwigEnvironment($loader, ['debug' => true]);
+
 
     $filename = __DIR__ . '/../templates/signup.html.twig';
 
