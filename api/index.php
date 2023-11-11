@@ -29,7 +29,7 @@
 
     try {
         $mailer->send($email);
-        echo json_encode($_POST); // '{ "success":"true", "message": "confirmation emails sent" }';
+        echo json_encode(http_build_query(json_decode($_params))); // '{ "success":"true", "message": "confirmation emails sent" }';
     
     } catch (TransportExceptionInterface $e) {
         header('X-PHP-Response-Code: 500', true, '500');
