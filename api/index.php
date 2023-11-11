@@ -5,6 +5,7 @@
     use Symfony\Component\Mailer\Transport;
     use Symfony\Component\Mailer\Mailer;
     use Symfony\Component\Mime\Email;   
+    use Symfony\Bridge\Twig\Mime\TemplatedEmail;
     
     if(getBearerToken() != $_ENV['API_KEY']) {
         echo "Unauthorized";
@@ -19,16 +20,24 @@
     // Create the Mailer using your created Transport
     $mailer = new Mailer($transport);
 
-    $email = (new Email())
+    $email = (new TemplatedEmail())
         ->from($_ENV['SMTP_USER'])
-        ->to('info@kirsten-roschanski.de')
+        ->to(new Address($data->billing_info->email))
         //->cc('cc@example.com')
         ->bcc($_ENV['SMTP_USER'])
         //->replyTo('fabien@example.com')
         //->priority(Email::PRIORITY_HIGH)
-        ->subject('Time for Symfony Mailer2!')
-        ->text('Sending emails is fun again!')
-        ->html('<p>See Twig integration for better HTML integration!</p>');
+        ->subject('Thanks for signing up!')
+        
+        // path of the Twig template to render
+        ->htmlTemplate(__DIR__ . '/../templates/signup.html.twig')
+
+        // pass variables (name => value) to the template
+        ->context([
+            'expiration_date' => new \DateTime('+7 days'),
+            'username' => 'foo',
+        ])
+    ;    
 
     try {
         $mailer->send($email);
