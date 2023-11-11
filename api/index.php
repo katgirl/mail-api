@@ -6,6 +6,9 @@
     use Symfony\Component\Mailer\Mailer;
     use Symfony\Component\Mime\Address;
     use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+    use Symfony\Bridge\Twig\Mime\BodyRenderer;
+    use Twig\Loader\FilesystemLoader;
+    use Twig\Environment;
     
    // if(getBearerToken() != $_ENV['API_KEY']) {
    //     echo "Unauthorized";
@@ -16,7 +19,7 @@
     $body    = '{"checkout_type":"bank-transfer","billing_info":{"email":"kirsten@kirsten-roschanski.de","address":{"billing_firstname":"Kirsten","billing_lastname":"Roschanski","billing_street":"Schwalbenweg, 11, 11","billing_street_additional":"11","billing_zip":"35043","billing_city":"Marburg","billing_country":"DE","billing_phone":"+491799946813","billing_email":"kirsten@kirsten-roschanski.de","billing_notes":"test"},"total":1200,"currency":"EUR","payment_method":"Banküberweisung","cart":[{"quantity":1,"article":"Françoise Dugourd-Caput - Lascive - 80 x 60 cm","amount":1200,"currency":"EUR","imageUrl":"https://cdn.sanity.io/images/ovj42q9c/galleristic/d8d760fc438ca4aabee6b473e2524abbbab24f38-1808x2438.png"}]}}';
     $data = json_decode($body);
 
-    $filename = __DIR__ . '/../templates/signup.txt.twig';
+    $filename = __DIR__ . '/../templates/signup.html.twig';
 
     if (file_exists($filename)) {
         echo "Die Datei $filename existiert";
@@ -38,7 +41,21 @@
         
         // path of the Twig template to render
         ->htmlTemplate($filename)
+
+        // pass variables (name => value) to the template
+        ->context([
+            'expiration_date' => new \DateTime('+7 days'),
+            'username' => 'foo',
+        ])
     ;    
+
+    $loader = new FilesystemLoader('/path/to/twig/templates/');
+
+    $twigEnv = new Environment($loader);
+
+    $twigBodyRenderer = new BodyRenderer($twigEnv);
+
+    $twigBodyRenderer->render($email);
 
     try {
         $mailer->send($email);
