@@ -49,7 +49,7 @@
         ])
     ;    
 
-    $loader = new FilesystemLoader('/path/to/twig/templates/');
+    $loader = new FilesystemLoader(__DIR__ . '/../templates/');
 
     $twigEnv = new Environment($loader);
 
