@@ -4,7 +4,7 @@
     
     use Symfony\Component\Mailer\Transport;
     use Symfony\Component\Mailer\Mailer;
-    use Symfony\Component\Mime\Email;   
+    use Symfony\Component\Mime\Address;
     use Symfony\Bridge\Twig\Mime\TemplatedEmail;
     
     if(getBearerToken() != $_ENV['API_KEY']) {
